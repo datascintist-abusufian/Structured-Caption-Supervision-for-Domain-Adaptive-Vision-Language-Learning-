@@ -17,6 +17,12 @@ The framework reformulates diagnostic and demographic metadata as class-aware st
 
 ---
 
+## At a glance
+
+![Method overview](docs/figures/Structured-Caption_overview.png)
+
+**Figure 1. Method overview.** (a) BCN20000 dermoscopy images with clinical metadata. (b) Metadata are turned into one structured caption per image. (c) CLIP (ViT-B/32) is fine-tuned with a hybrid loss of 0.7 × cross-entropy + 0.3 × image–text contrastive; BLIP and image-only baselines are trained for comparison. (d) Results on the BCN20000 test set, an example prediction and BLIP caption-generation scores.
+
 ## 🔑 Key Features
 
 - **Structured Caption Supervision**: Transforms clinical metadata (diagnosis, age, sex, anatomical site) into semantically consistent textual descriptions for multimodal alignment.
