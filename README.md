@@ -1,5 +1,31 @@
 # Vision-Language Learning with Structured Clinical Caption Supervision for Automated Skin Lesion Classification and Melanoma Detection
 
+## At a glance
+
+![Method overview](docs/figures/Structured-Caption_overview.png)
+
+**Figure 1. Method overview.** (a) BCN20000 dermoscopy images with clinical metadata. (b) Metadata are turned into one structured caption per image. (c) CLIP (ViT-B/32) is fine-tuned with a hybrid loss of 0.7 × cross-entropy + 0.3 × image–text contrastive; BLIP and image-only baselines are trained for comparison. (d) Results on the BCN20000 test set, an example prediction and BLIP caption-generation scores.
+
+### 📈 Main results (BCN20000 test set, 6 classes)
+
+| Model | Accuracy | Macro-F1 | MCC | ROC-AUC |
+| :--- | :--- | :--- | :--- | :--- |
+| CNN (EfficientNet-B4) | 82.97% | 0.7801 | 0.7764 | 0.9654 |
+| ViT-B/16 (Image-only baseline)* | 64.62%† | 0.5221† | 0.4857† | — |
+| **CLIP (Fine-tuned - Proposed)** | **85.72%** | **0.8095** | **0.8116** | **0.9738** |
+| BLIP (Fine-tuned - Proposed) | 82.97% | 0.7812 | 0.7745 | 0.9639 |
+
+† ViT-B/16 trained on 4-class subset (AK, BCC, MEL, NV) due to data availability.
+
+### Caption Generation (BLIP)
+
+| Metric | Zero-shot | Fine-tuned | Gain |
+| :--- | :--- | :--- | :--- |
+| BLEU-4 | 0.0000 | 0.6108 | +0.6108 |
+| ROUGE-L | 0.0892 | 0.8329 | +0.7437 |
+
+---
+
 ## 📋 Overview
 
 This repository contains the official implementation of the paper:
@@ -16,12 +42,6 @@ The study develops a vision-language learning framework using structured clinica
 The framework reformulates diagnostic and demographic metadata as class-aware structured captions to provide controlled multimodal supervision for domain adaptation of vision-language models.
 
 ---
-
-## At a glance
-
-![Method overview](docs/figures/Structured-Caption_overview.png)
-
-**Figure 1. Method overview.** (a) BCN20000 dermoscopy images with clinical metadata. (b) Metadata are turned into one structured caption per image. (c) CLIP (ViT-B/32) is fine-tuned with a hybrid loss of 0.7 × cross-entropy + 0.3 × image–text contrastive; BLIP and image-only baselines are trained for comparison. (d) Results on the BCN20000 test set, an example prediction and BLIP caption-generation scores.
 
 ## 🔑 Key Features
 
@@ -58,28 +78,6 @@ The framework reformulates diagnostic and demographic metadata as class-aware st
 | CLIP (Fine-tuned) | **Contrastive VLM (Proposed)** | ViT-B/32 | ✅ Structured Captions |
 | BLIP (Zero-shot) | Generative VLM | ViT-B/16 | ❌ No |
 | BLIP (Fine-tuned) | **Generative VLM (Proposed)** | ViT-B/16 | ✅ Structured Captions |
-
----
-
-## 📈 Results
-
-### Main Results (6 Classes)
-
-| Model | Accuracy | Macro-F1 | MCC | ROC-AUC |
-| :--- | :--- | :--- | :--- | :--- |
-| CNN (EfficientNet-B4) | 82.97% | 0.7801 | 0.7764 | 0.9654 |
-| ViT-B/16 (Image-only baseline)* | 64.62%† | 0.5221† | 0.4857† | — |
-| **CLIP (Fine-tuned - Proposed)** | **85.72%** | **0.8095** | **0.8116** | **0.9738** |
-| BLIP (Fine-tuned - Proposed) | 82.97% | 0.7812 | 0.7745 | 0.9639 |
-
-† ViT-B/16 trained on 4-class subset (AK, BCC, MEL, NV) due to data availability.
-
-### Caption Generation (BLIP)
-
-| Metric | Zero-shot | Fine-tuned | Gain |
-| :--- | :--- | :--- | :--- |
-| BLEU-4 | 0.0000 | 0.6108 | +0.6108 |
-| ROUGE-L | 0.0892 | 0.8329 | +0.7437 |
 
 ---
 
